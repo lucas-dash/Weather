@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./output.css">
+    <title>Weather App</title>
+</head>
+
+<body class="bg-sky-600 text-white flex justify-center align-middle flex-col">
+
+    <header>
+        <div class="current-weather">
+            <div data-weather-code class="weather-icon">
+
+            </div>
+
+            <h1 class="text-xl">Moje Poloha</h1>
+            <h2 data-weather-temp class="text-4xl">20<span data-unit-temp>&#8451;</span> </h2>
+
+            <div class="max-min-temp">
+                <span class="arrow-up"></span>
+                <p data-weather-maxTemp>5<span data-unit-temp>&#8451;</span></p>
+
+                <span class="arrow-down"></span>
+                <p data-weather-minTemp>0<span data-unit-temp>&#8451;</span></p>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hourly-weather">
+            <p><span class="hour-icon"></span>Hodinová Předpověď</p>
+            <div class="hourly-data">
+                <div class="one-hour">
+                    <p data-weather-hourly-timestamp>Nyní</p>
+                    <p data-weather-code></p>
+                    <p data-weather-hourly-temp="">4<span data-unit-temp>&#8451;</span></p>
+                </div>
+                <div class="one-hour">
+                    <p data-weather-hourly-timestamp>17</p>
+                    <p data-weather-code></p>
+                    <p data-weather-hourly-temp="">4<span data-unit-temp>&#8451;</span></p>
+                </div>
+                <div class="one-hour">
+                    <p data-weather-hourly-timestamp>18</p>
+                    <p data-weather-code></p>
+                    <p data-weather-hourly-temp="">4<span data-unit-temp>&#8451;</span></p>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="daily-weather">
+            <p><span class="daily-icon"></span>Denní Předpověď</p>
+            <div class="daily-data">
+                <div class="one-day">
+
+                    <p>Dnes</p>
+                    <p data-weather-code></p>
+                    <div class="min-temp">
+                        <span class="arrow-down"></span>
+                        <p data-weather-minTemp>0<span data-unit-temp>&#8451;</span></p>
+                    </div>
+                    <div class="max-temp">
+                        <span class="arrow-up"></span>
+                        <p data-weather-maxTemp>5<span data-unit-temp>&#8451;</span></p>
+                    </div>
+                </div>
+                <div class="one-day">
+
+                    <p>Dnes</p>
+                    <p data-weather-code></p>
+                    <div class="min-temp">
+                        <span class="arrow-down"></span>
+                        <p data-weather-minTemp>0<span data-unit-temp>&#8451;</span></p>
+                    </div>
+                    <div class="max-temp">
+                        <span class="arrow-up"></span>
+                        <p data-weather-maxTemp>9<span data-unit-temp>&#8451;</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="other-current-data">
+
+            <div class="sunset-sunrise">
+                <div class="sunrise">
+                    <h4>Východ</h4>
+                    <p data-current-sunrise>7:32</p>
+                </div>
+                <div class="sunset">
+                    <h4>Západ</h4>
+                    <p data-current-sunset>17:06</p>
+                </div>
+            </div>
+
+            <div class="percip">
+                <p>Srážky</p>
+                <h4 data-current-percip>21 <span data-unit-percip>mm</span></h4>
+            </div>
+
+            <div class="wind-direction">
+                <p>Vítr</p>
+                <h4>29 <span data-unit-wind>Km/h</span></h4>
+            </div>
+
+            <div class="apparent-temp">
+                <p>Pocitově</p>
+                <h4 data-apparent-temp>-2<span data-unit-temp>&#8451;</span></h4>
+            </div>
+
+        </section>
+    </main>
+
+
+    <script src="../src/main.js"></script>
+
+</body>
+
+</html>
