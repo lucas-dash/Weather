@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.one-hour {
+  @apply w-20;
+}
+
+.one-day {
+  @apply flex justify-around h-8 items-center border-b border-sky-300;
+}
+
+.section-name {
+  @apply px-2 pt-2 text-sm;
+}
+
+.card-data {
+  @apply bg-sky-600 rounded-2xl w-28 h-28 flex flex-col justify-center items-center;
+}
