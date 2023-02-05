@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 .one-hour {
-  @apply w-20;
+  @apply w-20 flex flex-col items-center gap-2;
 }
 
 .one-day {
-  @apply flex justify-around h-8 items-center border-b border-sky-300;
+  @apply flex justify-between h-8 items-center border-b border-sky-300;
 }
 
 .section-name {
