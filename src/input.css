@@ -15,5 +15,5 @@
 }
 
 .card-data {
-  @apply bg-sky-600 rounded-2xl w-28 h-28 flex flex-col justify-center items-center;
+  @apply bg-sky-600 rounded-2xl w-32 h-32 flex flex-col gap-2 justify-center items-center;
 }

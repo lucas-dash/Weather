@@ -9,31 +9,40 @@
     <title>Weather App</title>
 </head>
 
-<!-- npx tailwindcss -i ./src/input.css -o ./public/output.css --watch -->
-
 <body class="bg-gradient-to-r from-sky-500 to-cyan-500 text-white h-screen">
 
     <header class="flex content-center justify-center w-full">
+
+        <!--! current Weather  -->
         <div class="current-weather flex items-center flex-col">
 
+            <!--? my location -->
             <div class="flex items-center">
                 <img src="../src/icons/vuesax/linear/location.svg" alt="location">
-                <h1 class="text-xl p-2 inline-block">MojePoloha</h1>
+                <h1 class="text-xl p-2 inline-block position">Moje Poloha</h1>
             </div>
-            <div data-weather-code class="weather-icon">
-                <img src="../src/icons/vuesax/linear/cloud-sunny.svg" alt="weather" data-weather-code class="h-10">
-            </div>
-            <h2 data-weather-temp class="text-4xl text-center">20<span data-unit-temp>&#8451;</span></h2>
 
+            <!--? icon weather -->
+            <div class="weather-icon">
+                <img src="../src/icons/vuesax/linear/cloud-sunny.svg" alt="weather icon" data-current-code class="h-10">
+            </div>
+
+            <!--? current tempeture -->
+            <div class="text-4xl">
+                <h2 data-current-temp class="inline-block">--</h2>
+                <span data-unit-temp class="">&#8451;</span>
+            </div>
+
+            <!--? min and max tempeture  -->
             <div class="max-min-temp flex justify-between py-2">
-                <!-- bg-[url('/img/hero-pattern.svg')] -->
                 <img src="../src/icons/vuesax/linear/arrow-up.svg" alt="max-temp" class="w-4">
-                <p data-weather-maxTemp class="inline-block">5<span data-unit-temp>&#8451;</span></p>
+                <p data-current-maxTemp class="inline-block">5<span data-unit-temp>&#8451;</span></p>
 
                 <img src="../src/icons/vuesax/linear/arrow-down.svg" alt="max-temp" class="w-4">
-                <p data-weather-minTemp class="inline-block">0<span data-unit-temp>&#8451;</span></p>
+                <p data-current-minTemp class="inline-block">0<span data-unit-temp>&#8451;</span></p>
             </div>
         </div>
+
     </header>
 
     <!-- main content -->
@@ -116,15 +125,14 @@
             class="other-current-data w-4/5 m-auto sm:max-w-2xl my-4 grid gap-2 grid-cols-2 justify-items-center sm:grid-cols-4">
 
             <div class="sunset-sunrise card-data">
-
-                <div class="sunrise flex flex-col items-center">
-                    <h4 class="text-sm"><img src="../src/icons/vuesax/linear/sun-fog.svg" alt="sunrise"
-                            class="inline-block w-4">Východ</h4>
-                    <p data-current-sunrise class="text-lg font-bold">7:32</p>
-                </div>
-                <div class="sunset flex flex-col items-center">
+                <img src="../src/icons/vuesax/linear/sun-fog.svg" alt="sunrise" class="inline-block w-4">
+                <div class="sunrise flex justify-between w-full px-3">
+                    <h4 class="text-sm">Východ</h4>
                     <h4 class="text-sm">Západ</h4>
-                    <p data-current-sunset class="text-lg font-bold">17:06</p>
+                </div>
+                <div class="sunset flex justify-between w-full px-4">
+                    <p data-current-sunrise class="text-lg font-medium">7:32</p>
+                    <p data-current-sunset class="text-lg font-medium">17:06</p>
                 </div>
             </div>
 
@@ -147,7 +155,7 @@
     </main>
 
 
-    <script src="../src/main.js"></script>
+    <script type="module" src="/public/app.js"></script>
 
 </body>
 
