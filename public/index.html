@@ -18,13 +18,13 @@
 
             <!--? my location -->
             <div class="flex items-center">
-                <img src="../src/icons/vuesax/linear/location.svg" alt="location">
+                <img src="./icons/vuesax/linear/location.svg" alt="location">
                 <h1 class="text-xl p-2 inline-block position">Moje Poloha</h1>
             </div>
 
             <!--? icon weather -->
             <div class="weather-icon">
-                <img src="../src/icons/vuesax/linear/cloud-sunny.svg" alt="weather icon" data-current-code class="h-10">
+                <img src="./icons/vuesax/linear/cloud-sunny.svg" alt="weather icon" data-current-icon class="h-10">
             </div>
 
             <!--? current tempeture -->
@@ -35,11 +35,11 @@
 
             <!--? min and max tempeture  -->
             <div class="max-min-temp flex justify-between py-2">
-                <img src="../src/icons/vuesax/linear/arrow-up.svg" alt="max-temp" class="w-4">
-                <p data-current-maxTemp class="inline-block">5<span data-unit-temp>&#8451;</span></p>
+                <img src="./icons/vuesax/linear/arrow-up.svg" alt="max-temp" class="w-4">
+                <p data-current-maxTemp class="inline-block">--</p><span data-unit-temp>&#8451;</span>
 
-                <img src="../src/icons/vuesax/linear/arrow-down.svg" alt="max-temp" class="w-4">
-                <p data-current-minTemp class="inline-block">0<span data-unit-temp>&#8451;</span></p>
+                <img src="./icons/vuesax/linear/arrow-down.svg" alt="max-temp" class="w-4">
+                <p data-current-minTemp class="inline-block">--</p><span data-unit-temp>&#8451;</span>
             </div>
         </div>
 
@@ -50,24 +50,24 @@
         <!--! hourly weather  -->
         <section class="hourly-weather bg-sky-700 rounded-2xl overflow-x-scroll w-4/5 m-auto my-4 sm:max-w-2xl">
             <p class="section-name">
-                <img src="../src/icons/vuesax/linear/clock.svg" alt="hourly-icon" class="inline-block w-5 mr-1">
+                <img src="./icons/vuesax/linear/clock.svg" alt="hourly-icon" class="inline-block w-5 mr-1">
                 Hodinová Předpověď
             </p>
             <div class="hourly-data p-2 flex gap-2 w-full items-center">
                 <div class="one-hour">
                     <p data-weather-hourly-timestamp class="text-center">Nyní</p>
-                    <img src="../src/icons/vuesax/linear/cloud-drizzle.svg" alt="icon-weather" data-weather-code
+                    <img src="./icons/vuesax/linear/cloud-drizzle.svg" alt="icon-weather" data-weather-code
                         class="inline-block">
                     <p data-weather-hourly-temp class="text-center">4<span data-unit-temp>&#8451;</span></p>
                 </div>
                 <div class="one-hour">
                     <p data-weather-hourly-timestamp class="text-center">17</p>
-                    <img src="../src/icons/vuesax/linear/cloud.svg" alt="icon-weather" data-weather-code>
+                    <img src="./icons/vuesax/linear/cloud.svg" alt="icon-weather" data-weather-code>
                     <p data-weather-hourly-temp class="text-center">4<span data-unit-temp>&#8451;</span></p>
                 </div>
                 <div class="one-hour">
                     <p data-weather-hourly-timestamp class="text-center">18</p>
-                    <img src="../src/icons/vuesax/linear/cloud.svg" alt="icon-weather" data-weather-code>
+                    <img src="./icons/vuesax/linear/cloud.svg" alt="icon-weather" data-weather-code>
                     <p data-weather-hourly-temp class="text-center">4<span data-unit-temp>&#8451;</span></p>
                 </div>
             </div>
@@ -77,7 +77,7 @@
         <!--! daily weather -->
         <section class="daily-weather bg-sky-700 rounded-2xl w-4/5 m-auto sm:max-w-2xl">
 
-            <p class="section-name"><img src="../src/icons/vuesax/linear/calendar.svg" alt="daily weather"
+            <p class="section-name"><img src="./icons/vuesax/linear/calendar.svg" alt="daily weather"
                     class="inline-block w-5 mr-1">
                 Denní Předpověď</p>
 
@@ -85,16 +85,16 @@
 
                 <div class="one-day">
                     <p class="w-16">Dnes</p>
-                    <img src="../src/icons/vuesax/linear/cloud.svg" alt="icon-weather" data-weather-code>
+                    <img src="./icons/vuesax/linear/cloud.svg" alt="icon-weather" data-weather-code>
 
                     <div class="max-min-temp flex w-28 justify-center gap-3">
 
                         <div class="min-temp flex items-center">
-                            <img src="../src/icons/vuesax/linear/arrow-up.svg" alt="max-temp" class="w-4">
+                            <img src="./icons/vuesax/linear/arrow-up.svg" alt="max-temp" class="w-4">
                             <p data-weather-minTemp>0<span data-unit-temp>&#8451;</span></p>
                         </div>
                         <div class="max-temp flex items-center">
-                            <img src="../src/icons/vuesax/linear/arrow-down.svg" alt="max-temp" class="w-4">
+                            <img src="./icons/vuesax/linear/arrow-down.svg" alt="max-temp" class="w-4">
                             <p data-weather-maxTemp>5<span data-unit-temp>&#8451;</span></p>
                         </div>
 
@@ -103,16 +103,16 @@
                 <div class="one-day">
 
                     <p class="w-16">Pondělí</p>
-                    <img src="../src/icons/vuesax/linear/cloud.svg" alt="icon-weather" data-weather-code>
+                    <img src="./icons/vuesax/linear/cloud.svg" alt="icon-weather" data-weather-code>
 
                     <div class="max-min-temp flex w-28 justify-center gap-3">
 
                         <div class="min-temp flex items-center">
-                            <img src="../src/icons/vuesax/linear/arrow-up.svg" alt="max-temp" class="w-4">
+                            <img src="./icons/vuesax/linear/arrow-up.svg" alt="max-temp" class="w-4">
                             <p data-weather-minTemp>10<span data-unit-temp>&#8451;</span></p>
                         </div>
                         <div class="max-temp flex items-center">
-                            <img src="../src/icons/vuesax/linear/arrow-down.svg" alt="max-temp" class="w-4">
+                            <img src="./icons/vuesax/linear/arrow-down.svg" alt="max-temp" class="w-4">
                             <p data-weather-maxTemp>0<span data-unit-temp>&#8451;</span></p>
                         </div>
 
@@ -125,30 +125,38 @@
             class="other-current-data w-4/5 m-auto sm:max-w-2xl my-4 grid gap-2 grid-cols-2 justify-items-center sm:grid-cols-4">
 
             <div class="sunset-sunrise card-data">
-                <img src="../src/icons/vuesax/linear/sun-fog.svg" alt="sunrise" class="inline-block w-4">
+                <img src="./icons/vuesax/linear/sun-fog.svg" alt="sunrise" class="inline-block w-4">
                 <div class="sunrise flex justify-between w-full px-3">
                     <h4 class="text-sm">Východ</h4>
                     <h4 class="text-sm">Západ</h4>
                 </div>
                 <div class="sunset flex justify-between w-full px-4">
-                    <p data-current-sunrise class="text-lg font-medium">7:32</p>
-                    <p data-current-sunset class="text-lg font-medium">17:06</p>
+                    <p data-current-sunrise class="text-lg font-medium">--:--</p>
+                    <p data-current-sunset class="text-lg font-medium">--:--</p>
                 </div>
             </div>
 
             <div class="percip card-data">
                 <p>Srážky</p>
-                <h4 data-current-percip class="font-bold">21 <span data-unit-percip>mm</span></h4>
+                <div class="font-bold">
+                    <h4 data-current-precip class="inline-block">21</h4><span data-unit-percip> mm</span>
+                </div>
             </div>
 
             <div class="wind-direction card-data">
-                <p><img src="../src/icons/vuesax/linear/wind.svg" alt="sunrise" class="inline-block w-4 mr-1">Vítr</p>
-                <h4 class="font-bold">29 <span data-unit-wind>Km/h</span></h4>
+                <p><img src="./icons/vuesax/linear/wind.svg" alt="sunrise" class="inline-block w-4 mr-1">Vítr</p>
+                <div class="font-bold">
+                    <h4 data-current-windspeed class="inline-block">--</h4>
+                    <span data-unit-wind>Km/h</span>
+                </div>
             </div>
 
             <div class="apparent-temp card-data">
                 <p>Pocitově</p>
-                <h4 data-apparent-temp class="font-bold">-2<span data-unit-temp>&#8451;</span></h4>
+                <div class="font-bold">
+                    <h4 data-apparent-temp class="inline-block">--</h4>
+                    <span data-unit-temp>&#8451;</span>
+                </div>
             </div>
 
         </section>
