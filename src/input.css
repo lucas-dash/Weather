@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .one-hour {
-  @apply w-20 flex flex-col items-center gap-2;
+  @apply flex flex-col items-center gap-2;
 }
 
 .one-day {

@@ -40,7 +40,7 @@ export const getWeather = async (
     const response = await fetch(endpoint);
     if (response.ok) {
       const jsonResponse = await response.json();
-      console.log(jsonResponse);
+      // console.log(jsonResponse);
       return {
         current: filterCurrentData(jsonResponse),
         daily: filterDailyData(jsonResponse),
@@ -108,7 +108,7 @@ function filterDailyData({ daily }: any): DailyWeather {
     return {
       timestamp: time * 1000,
       iconCode: daily.weathercode[index],
-      maxtemp: Math.round(daily.temperature_2m_max[index]),
+      maxTemp: Math.round(daily.temperature_2m_max[index]),
       minTemp: Math.round(daily.temperature_2m_min[index]),
     };
   });
@@ -123,5 +123,6 @@ function filterHourlyData({ current_weather, hourly }: any): HourlyWeather {
         maxTemp: Math.round(hourly.temperature_2m[index]),
       };
     })
-    .filter(({ timestamp }: any) => timestamp >= current_weather.time * 1000);
+    .filter(({ timestamp }: any) => timestamp >= current_weather.time * 1000)
+    .slice(0, 49);
 }
