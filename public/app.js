@@ -38,17 +38,27 @@ const showCurrentWeather = (currentWeather) => {
 const showHourlyWeather = (hourlyWeather) => {
     const hourlySection = document.querySelector(".hourly-data");
     const hourlyTemplate = document.getElementById("hourly-template");
+    let executed = false;
     const hourFormat = (time) => {
-        return Number(Intl.DateTimeFormat(undefined, { hour: "numeric" }).format(time));
+        const convert = Number(Intl.DateTimeFormat(undefined, { hour: "numeric" }).format(time));
+        if (!executed) {
+            executed = true;
+            return "Teď";
+        }
+        else {
+            return convert;
+        }
     };
     if (hourlySection) {
-        hourlySection.innerHTML = "";
         hourlyWeather.forEach((hour) => {
             const { timestamp, maxTemp, iconCode } = hour;
             const template = hourlyTemplate.content.cloneNode(true);
-            setChild("hourly", "time", hourFormat(timestamp), template);
-            setChild("hourly", "maxTemp", maxTemp, template);
-            setChild("hourly", "icon", getIconUrl(iconCode), template);
+            const time = template.querySelector("[data-hourly-time]");
+            if (time) {
+                time.textContent = hourFormat(timestamp);
+            }
+            setTemplateChild("hourly", "maxTemp", maxTemp, template);
+            setTemplateChild("hourly", "icon", getIconUrl(iconCode), template);
             hourlySection.appendChild(template);
         });
     }
@@ -59,11 +69,10 @@ const showDailyWeather = (dailyWeather) => {
     const dailyTemplate = document.getElementById("daily-template");
     const weekFormat = Intl.DateTimeFormat(undefined, { weekday: "short" });
     if (dailySection) {
-        dailySection.innerHTML = "";
         dailyWeather.forEach((oneDay) => {
             const { timestamp, iconCode, minTemp, maxTemp } = oneDay;
             const template = dailyTemplate.content.cloneNode(true);
-            if (template) {
+            if (dailySection) {
                 const time = template.querySelector("[data-daily-time]");
                 if (time) {
                     const day = weekFormat.format(timestamp);
@@ -74,26 +83,15 @@ const showDailyWeather = (dailyWeather) => {
                         ? (time.textContent = "Dnes")
                         : (time.textContent = day);
                 }
-                const lowTemp = template.querySelector("[data-daily-minTemp");
-                if (lowTemp)
-                    lowTemp.textContent = minTemp;
-                const highTemp = template.querySelector("[data-daily-maxTemp");
-                if (highTemp)
-                    highTemp.textContent = maxTemp;
-                const weatherIcon = template.querySelector("[data-daily-icon]");
-                if (weatherIcon)
-                    weatherIcon.src = getIconUrl(iconCode);
+                setTemplateChild("daily", "minTemp", minTemp, template);
+                setTemplateChild("daily", "maxTemp", maxTemp, template);
+                setTemplateChild("daily", "icon", getIconUrl(iconCode), template);
             }
             dailySection.appendChild(template);
         });
     }
 };
-//todo hourly time yet
-// todo iterfaces
-// todo wind direction
-//todo hourly width
-// todo connect setChild and setValue
-function setChild(time, selector, value, parent) {
+function setTemplateChild(time, selector, value, parent) {
     const body = parent.querySelector(`[data-${time}-${selector}]`);
     if (body) {
         if (typeof value === "number" && body instanceof HTMLParagraphElement) {
@@ -105,10 +103,8 @@ function setChild(time, selector, value, parent) {
     }
 }
 function setValue(time, selector, value) {
-    const head = document.querySelector(`[data-${time}-${selector}]`);
-    if (head) {
-        head.textContent = value;
-    }
+    const body = document.querySelector(`[data-${time}-${selector}]`);
+    body && (body.textContent = value);
 }
 function convertToTime(value) {
     const time = new Date(value * 1000).toLocaleTimeString([], {

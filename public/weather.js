@@ -14,7 +14,7 @@ export const getWeather = (lat, lon, timezone) => __awaiter(void 0, void 0, void
         const response = yield fetch(endpoint);
         if (response.ok) {
             const jsonResponse = yield response.json();
-            // console.log(jsonResponse);
+            console.log(jsonResponse);
             return {
                 current: filterCurrentData(jsonResponse),
                 daily: filterDailyData(jsonResponse),

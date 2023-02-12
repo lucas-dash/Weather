@@ -11,15 +11,15 @@ export interface CurrentWeather {
   sunOut: number;
 }
 export interface DailyWeather {
-  timestamp: number;
-  iconCode: number;
-  maxTemp: number;
-  minTemp: number;
+  timestamp: number[];
+  iconCode: number[];
+  maxTemp: number[];
+  minTemp: number[];
 }
 export interface HourlyWeather {
-  timestamp: number;
-  iconCode: number;
-  maxTemp: number;
+  timestamp: number[];
+  iconCode: number[];
+  maxTemp: number[];
 }
 
 export interface WeatherData {
@@ -40,7 +40,7 @@ export const getWeather = async (
     const response = await fetch(endpoint);
     if (response.ok) {
       const jsonResponse = await response.json();
-      // console.log(jsonResponse);
+      console.log(jsonResponse);
       return {
         current: filterCurrentData(jsonResponse),
         daily: filterDailyData(jsonResponse),
