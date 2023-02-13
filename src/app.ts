@@ -2,6 +2,9 @@ import { getWeather } from "./weather.js";
 import { iconMap } from "./iconWeather.js";
 import { CurrentWeather } from "./weather.js";
 
+type Template = HTMLTemplateElement;
+type Heading = HTMLHeadingElement;
+
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition((position) => {
     let lat = position.coords.latitude;
@@ -44,6 +47,15 @@ const showCurrentWeather = (currentWeather: CurrentWeather): void => {
   );
   if (weatherIcon) weatherIcon.src = getIconUrl(iconCode);
 
+  const needle = document.querySelector(
+    "[data-current-winddirection]"
+  ) as HTMLDivElement;
+
+  function rotateNeedle(degrees: number): void {
+    needle.style.transform = `rotate(-${degrees}deg)`;
+  }
+
+  rotateNeedle(windDirection);
   setValue("current", "temp", currentTemp);
   setValue("current", "maxTemp", highTemp);
   setValue("current", "minTemp", lowTemp);
@@ -131,11 +143,6 @@ const showDailyWeather = (dailyWeather: []): void => {
     });
   }
 };
-
-// todo wind direction
-
-type Template = HTMLTemplateElement;
-type Heading = HTMLHeadingElement;
 
 function setTemplateChild(
   time: string,

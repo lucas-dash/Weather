@@ -25,6 +25,11 @@ const showCurrentWeather = (currentWeather) => {
     const weatherIcon = document.querySelector("[data-current-icon]");
     if (weatherIcon)
         weatherIcon.src = getIconUrl(iconCode);
+    const needle = document.querySelector("[data-current-winddirection]");
+    function rotateNeedle(degrees) {
+        needle.style.transform = `rotate(-${degrees}deg)`;
+    }
+    rotateNeedle(windDirection);
     setValue("current", "temp", currentTemp);
     setValue("current", "maxTemp", highTemp);
     setValue("current", "minTemp", lowTemp);
