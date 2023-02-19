@@ -14,7 +14,12 @@ export const getWeather = (lat, lon, timezone) => __awaiter(void 0, void 0, void
         const response = yield fetch(endpoint);
         if (response.ok) {
             const jsonResponse = yield response.json();
-            console.log(jsonResponse);
+            // console.log(jsonResponse);
+            const anim = document.querySelectorAll('.animation');
+            anim.forEach((x) => x.remove());
+            const needleSpin = document.querySelector('#needle');
+            needleSpin === null || needleSpin === void 0 ? void 0 : needleSpin.classList.remove('animate-spin');
+            needleSpin === null || needleSpin === void 0 ? void 0 : needleSpin.classList.add('transform');
             return {
                 current: filterCurrentData(jsonResponse),
                 daily: filterDailyData(jsonResponse),

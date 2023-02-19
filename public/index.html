@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 
 <head>
     <meta charset="UTF-8">
@@ -50,13 +50,21 @@
 
         <!--! hourly weather  -->
         <section
-            class="hourly-weathe rounded-2xl w-4/5 m-auto my-4 sm:max-w-2xl bg-gradient-to-tr from-indigo-600 to-sky-700">
+            class="hourly-weather rounded-2xl w-4/5 m-auto my-4 sm:max-w-2xl bg-gradient-to-tr from-indigo-600 to-sky-700">
             <p class="section-name">
                 <img src="./icons/vuesax/linear/clock.svg" alt="hourly-icon" class="inline-block w-5 mr-1">
                 Hodinová Předpověď
             </p>
 
             <div class="hourly-data px-6 py-4 flex gap-6 w-full items-center overflow-x-scroll">
+
+                <div class="animation w-full">
+                    <div class="flex items-center justify-center gap-4">
+                        <div class="h-4 w-4 rounded-full bg-gray-300 animate-ping delay-1000"></div>
+                        <div class="h-4 w-4 rounded-full bg-gray-300 mx-2 animate-ping"></div>
+                        <div class="h-4 w-4 rounded-full bg-gray-300 animate-ping"></div>
+                    </div>
+                </div>
 
                 <template id="hourly-template">
 
@@ -85,6 +93,14 @@
                 Denní Předpověď</p>
 
             <div class="daily-data p-4 flex flex-col gap-2 w-full">
+
+                <div class="animation w-full">
+                    <div class="flex items-center justify-center gap-4">
+                        <div class="h-4 w-4 rounded-full bg-gray-300 animate-ping delay-1000"></div>
+                        <div class="h-4 w-4 rounded-full bg-gray-300 mx-2 animate-ping"></div>
+                        <div class="h-4 w-4 rounded-full bg-gray-300 animate-ping"></div>
+                    </div>
+                </div>
 
                 <template id="daily-template">
 
@@ -123,6 +139,7 @@
                 </div>
                 <div class="sunset flex justify-between w-full px-4">
                     <p data-current-sunrise class="text-lg font-medium">--:--</p>
+                    <span class="px-1">|</span>
                     <p data-current-sunset class="text-lg font-medium">--:--</p>
                 </div>
             </div>
@@ -136,11 +153,42 @@
             </div>
 
             <div class="card-data">
-                <p><img src="./icons/vuesax/linear/wind.svg" alt="sunrise" class="inline-block w-5 mr-1">Vítr</p>
-                <div class="font-bold">
-                    <h4 data-current-windspeed class="inline-block">--</h4>
-                    <span data-unit-wind>Km/h</span>
+                <!-- wind km -->
+                <div class="z-20">
+                    <p><img src="./icons/vuesax/linear/wind.svg" alt="sunrise" class="inline-block w-5 mr-2">Vítr</p>
+                    <div class="font-bold">
+                        <h4 data-current-windspeed class="inline-block">--</h4>
+                        <span data-unit-wind>Km/h</span>
+                    </div>
                 </div>
+
+                <!-- wind direction -->
+                <div class="absolute z-0 opacity-50">
+                    <div class="w-28 h-28 rounded-full flex justify-center items-center relative">
+
+                        <div id="needle" data-current-winddirection
+                            class="w-3/4 h-1 border-l-8 rounded-l-lg border-red-600 rounded-r-md bg-gray-300 absolute origin-center animate-spin">
+                        </div>
+
+                        <div class="flex justify-center w-full">
+                            <div class="h-3 w-3 rounded-full bg-gray-300"></div>
+                            <div
+                                class="absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-between items-center text-white text-sm p-1">
+                                <div class="flex justify-center w-full">
+                                    <div>S</div>
+                                </div>
+                                <div class="flex justify-between w-full">
+                                    <div>Z</div>
+                                    <div>V</div>
+                                </div>
+                                <div class="flex justify-center w-full">
+                                    <div>J</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <div class="card-data">
@@ -151,37 +199,11 @@
                 </div>
             </div>
 
-            <div class="card-data">
-                <div class="w-28 h-28 bg-gray-200 rounded-full flex justify-center items-center relative">
-                    <div id="needle" data-current-winddirection
-                        class="w-3/5 h-1 border-l-8 rounded-l-lg border-red-600 rounded-r-md bg-gray-500 absolute transform origin-center">
-                    </div>
-                    <div class="flex justify-center w-full">
-                        <div class="h-3 w-3 rounded-full bg-gray-600"></div>
-                        <div
-                            class="absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-between items-center text-gray-600 text-sm p-1">
-                            <div class="flex justify-center w-full">
-                                <div>S</div>
-                            </div>
-                            <div class="flex justify-between w-full">
-                                <div>Z</div>
-                                <div>V</div>
-                            </div>
-                            <div class="flex justify-center w-full">
-                                <div>J</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
         </section>
     </main>
 
 
-    <script type="module" src="/public/app.js"></script>
+    <script type="module" src="./app.js"></script>
 
 </body>
 

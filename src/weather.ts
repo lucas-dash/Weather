@@ -40,7 +40,12 @@ export const getWeather = async (
     const response = await fetch(endpoint);
     if (response.ok) {
       const jsonResponse = await response.json();
-      console.log(jsonResponse);
+      // console.log(jsonResponse);
+      const anim = document.querySelectorAll('.animation');
+      anim.forEach((x) => x.remove());
+      const needleSpin = document.querySelector('#needle') as HTMLDivElement;
+      needleSpin?.classList.remove('animate-spin');
+      needleSpin?.classList.add('transform');
       return {
         current: filterCurrentData(jsonResponse),
         daily: filterDailyData(jsonResponse),
