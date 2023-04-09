@@ -144,5 +144,5 @@ function convertToTime(value) {
     return time;
 }
 function getIconUrl(iconCode) {
-    return `https://lucas-dash.github.io/icons/vuesax/linear/${iconMap.get(iconCode)}.svg`;
+    return `../public/icons/vuesax/linear/${iconMap.get(iconCode)}.svg`;
 }
