@@ -209,7 +209,5 @@ function convertToTime(value: number): string {
 }
 
 function getIconUrl(iconCode: number): string {
-  return `https://lucas-dash.github.io/Weather/icons/vuesax/linear/${iconMap.get(
-    iconCode
-  )}.svg`;
+  return `../public/icons/vuesax/linear/${iconMap.get(iconCode)}.svg`;
 }
