@@ -209,5 +209,5 @@ function convertToTime(value: number): string {
 }
 
 function getIconUrl(iconCode: number): string {
-  return `../public/icons/vuesax/linear/${iconMap.get(iconCode)}.svg`;
+  return `./icons/vuesax/linear/${iconMap.get(iconCode)}.svg`;
 }
