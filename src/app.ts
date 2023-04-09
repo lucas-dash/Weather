@@ -209,7 +209,7 @@ function convertToTime(value: number): string {
 }
 
 function getIconUrl(iconCode: number): string {
-  return `.https://lucas-dash.github.io/icons/vuesax/linear/${iconMap.get(
+  return `https://lucas-dash.github.io/icons/vuesax/linear/${iconMap.get(
     iconCode
   )}.svg`;
 }
