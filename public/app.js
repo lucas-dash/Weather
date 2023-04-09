@@ -5,156 +5,144 @@ const defaultLon = 14.21;
 const defaultTimezone = 'Prague/Europe';
 // ? getting current weather for now hour and day
 const getCurrentWeather = ({ current, daily, hourly }) => {
-  showCurrentWeather(current);
-  showHourlyWeather(hourly);
-  showDailyWeather(daily);
+    showCurrentWeather(current);
+    showHourlyWeather(hourly);
+    showDailyWeather(daily);
 };
 if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(
-    (position) => {
-      let lat = position.coords.latitude;
-      let lon = position.coords.longitude;
-      let timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      getWeather(lat, lon, timezone)
+    navigator.geolocation.getCurrentPosition((position) => {
+        let lat = position.coords.latitude;
+        let lon = position.coords.longitude;
+        let timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        getWeather(lat, lon, timezone)
+            .then(getCurrentWeather)
+            .catch((e) => {
+            console.log(e);
+            throw new Error('Failed load weather');
+        });
+    }, (error) => {
+        // if geolocation fails, use default values
+        let lat = defaultLat;
+        let lon = defaultLon;
+        let timezone = defaultTimezone;
+        getWeather(lat, lon, timezone)
+            .then(getCurrentWeather)
+            .catch((e) => {
+            throw new Error('Failed to load weather');
+        });
+    });
+}
+else {
+    // if geolocation not supported
+    alert('Zapni polohové služby!');
+    let lat = defaultLat;
+    let lon = defaultLon;
+    let timezone = defaultTimezone;
+    getWeather(lat, lon, timezone)
         .then(getCurrentWeather)
         .catch((e) => {
-          console.log(e);
-          throw new Error('Failed load weather');
-        });
-    },
-    (error) => {
-      // if geolocation fails, use default values
-      let lat = defaultLat;
-      let lon = defaultLon;
-      let timezone = defaultTimezone;
-      getWeather(lat, lon, timezone)
-        .then(getCurrentWeather)
-        .catch((e) => {
-          throw new Error('Failed to load weather');
-        });
-    }
-  );
-} else {
-  // if geolocation not supported
-  alert('Zapni polohové služby!');
-  let lat = defaultLat;
-  let lon = defaultLon;
-  let timezone = defaultTimezone;
-  getWeather(lat, lon, timezone)
-    .then(getCurrentWeather)
-    .catch((e) => {
-      throw new Error('Failed to load weather');
+        throw new Error('Failed to load weather');
     });
 }
 // ! current
 const showCurrentWeather = (currentWeather) => {
-  const {
-    currentTemp,
-    feelsLike,
-    highTemp,
-    lowTemp,
-    iconCode,
-    precip,
-    sunIn,
-    sunOut,
-    windDirection,
-    windSpeed,
-  } = currentWeather;
-  const weatherIcon = document.querySelector('[data-current-icon]');
-  if (weatherIcon) weatherIcon.src = getIconUrl(iconCode);
-  const needle = document.querySelector('[data-current-winddirection]');
-  function rotateNeedle(degrees) {
-    needle.style.transform = `rotate(-${degrees}deg)`;
-  }
-  rotateNeedle(windDirection);
-  setValue('current', 'temp', currentTemp);
-  setValue('current', 'maxTemp', highTemp);
-  setValue('current', 'minTemp', lowTemp);
-  setValue('current', 'sunrise', convertToTime(sunIn));
-  setValue('current', 'sunset', convertToTime(sunOut));
-  setValue('current', 'precip', precip);
-  setValue('current', 'windspeed', windSpeed);
-  setValue('apparent', 'temp', feelsLike);
+    const { currentTemp, feelsLike, highTemp, lowTemp, iconCode, precip, sunIn, sunOut, windDirection, windSpeed, } = currentWeather;
+    const weatherIcon = document.querySelector('[data-current-icon]');
+    if (weatherIcon)
+        weatherIcon.src = getIconUrl(iconCode);
+    const needle = document.querySelector('[data-current-winddirection]');
+    function rotateNeedle(degrees) {
+        needle.style.transform = `rotate(-${degrees}deg)`;
+    }
+    rotateNeedle(windDirection);
+    setValue('current', 'temp', currentTemp);
+    setValue('current', 'maxTemp', highTemp);
+    setValue('current', 'minTemp', lowTemp);
+    setValue('current', 'sunrise', convertToTime(sunIn));
+    setValue('current', 'sunset', convertToTime(sunOut));
+    setValue('current', 'precip', precip);
+    setValue('current', 'windspeed', windSpeed);
+    setValue('apparent', 'temp', feelsLike);
 };
 // ! hourly
 const showHourlyWeather = (hourlyWeather) => {
-  const hourlySection = document.querySelector('.hourly-data');
-  const hourlyTemplate = document.getElementById('hourly-template');
-  let executed = false;
-  const hourFormat = (time) => {
-    const convert = Number(
-      Intl.DateTimeFormat(undefined, { hour: 'numeric' }).format(time)
-    );
-    if (!executed) {
-      executed = true;
-      return 'Teď';
-    } else {
-      return convert;
+    const hourlySection = document.querySelector('.hourly-data');
+    const hourlyTemplate = document.getElementById('hourly-template');
+    let executed = false;
+    const hourFormat = (time) => {
+        const convert = Number(Intl.DateTimeFormat(undefined, { hour: 'numeric' }).format(time));
+        if (!executed) {
+            executed = true;
+            return 'Teď';
+        }
+        else {
+            return convert;
+        }
+    };
+    if (hourlySection) {
+        hourlyWeather.forEach((hour) => {
+            const { timestamp, maxTemp, iconCode } = hour;
+            const template = hourlyTemplate.content.cloneNode(true);
+            const time = template.querySelector('[data-hourly-time]');
+            if (time) {
+                time.textContent = hourFormat(timestamp);
+            }
+            setTemplateChild('hourly', 'maxTemp', maxTemp, template);
+            setTemplateChild('hourly', 'icon', getIconUrl(iconCode), template);
+            hourlySection.appendChild(template);
+        });
     }
-  };
-  if (hourlySection) {
-    hourlyWeather.forEach((hour) => {
-      const { timestamp, maxTemp, iconCode } = hour;
-      const template = hourlyTemplate.content.cloneNode(true);
-      const time = template.querySelector('[data-hourly-time]');
-      if (time) {
-        time.textContent = hourFormat(timestamp);
-      }
-      setTemplateChild('hourly', 'maxTemp', maxTemp, template);
-      setTemplateChild('hourly', 'icon', getIconUrl(iconCode), template);
-      hourlySection.appendChild(template);
-    });
-  }
 };
 // ! daily
 const showDailyWeather = (dailyWeather) => {
-  const dailySection = document.querySelector('.daily-data');
-  const dailyTemplate = document.getElementById('daily-template');
-  const weekFormat = Intl.DateTimeFormat(undefined, { weekday: 'short' });
-  if (dailySection) {
-    dailyWeather.forEach((oneDay) => {
-      const { timestamp, iconCode, minTemp, maxTemp } = oneDay;
-      const template = dailyTemplate.content.cloneNode(true);
-      if (dailySection) {
-        const time = template.querySelector('[data-daily-time]');
-        if (time) {
-          const day = weekFormat.format(timestamp);
-          const todayDay = new Intl.DateTimeFormat(undefined, {
-            weekday: 'short',
-          }).format(new Date());
-          day === todayDay
-            ? (time.textContent = 'Dnes')
-            : (time.textContent = day);
-        }
-        setTemplateChild('daily', 'minTemp', minTemp, template);
-        setTemplateChild('daily', 'maxTemp', maxTemp, template);
-        setTemplateChild('daily', 'icon', getIconUrl(iconCode), template);
-      }
-      dailySection.appendChild(template);
-    });
-  }
+    const dailySection = document.querySelector('.daily-data');
+    const dailyTemplate = document.getElementById('daily-template');
+    const weekFormat = Intl.DateTimeFormat(undefined, { weekday: 'short' });
+    if (dailySection) {
+        dailyWeather.forEach((oneDay) => {
+            const { timestamp, iconCode, minTemp, maxTemp } = oneDay;
+            const template = dailyTemplate.content.cloneNode(true);
+            if (dailySection) {
+                const time = template.querySelector('[data-daily-time]');
+                if (time) {
+                    const day = weekFormat.format(timestamp);
+                    const todayDay = new Intl.DateTimeFormat(undefined, {
+                        weekday: 'short',
+                    }).format(new Date());
+                    day === todayDay
+                        ? (time.textContent = 'Dnes')
+                        : (time.textContent = day);
+                }
+                setTemplateChild('daily', 'minTemp', minTemp, template);
+                setTemplateChild('daily', 'maxTemp', maxTemp, template);
+                setTemplateChild('daily', 'icon', getIconUrl(iconCode), template);
+            }
+            dailySection.appendChild(template);
+        });
+    }
 };
 function setTemplateChild(time, selector, value, parent) {
-  const body = parent.querySelector(`[data-${time}-${selector}]`);
-  if (body) {
-    if (typeof value === 'number' && body instanceof HTMLParagraphElement) {
-      body.textContent = value.toString();
-    } else if (typeof value === 'string' && body instanceof HTMLImageElement) {
-      body.src = value;
+    const body = parent.querySelector(`[data-${time}-${selector}]`);
+    if (body) {
+        if (typeof value === 'number' && body instanceof HTMLParagraphElement) {
+            body.textContent = value.toString();
+        }
+        else if (typeof value === 'string' && body instanceof HTMLImageElement) {
+            body.src = value;
+        }
     }
-  }
 }
 function setValue(time, selector, value) {
-  const body = document.querySelector(`[data-${time}-${selector}]`);
-  body && (body.textContent = value);
+    const body = document.querySelector(`[data-${time}-${selector}]`);
+    body && (body.textContent = value);
 }
 function convertToTime(value) {
-  const time = new Date(value * 1000).toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit',
-  });
-  return time;
+    const time = new Date(value * 1000).toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+    });
+    return time;
 }
 function getIconUrl(iconCode) {
-  return `./icons/vuesax/linear/${iconMap.get(iconCode)}.svg`;
+    return `../public/icons/vuesax/linear/${iconMap.get(iconCode)}.svg`;
 }
